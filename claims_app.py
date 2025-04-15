@@ -19,28 +19,28 @@ AREA = AREA = session.sql("select distinct AREA from raw.motor_insurance_policy_
 pd_area = AREA.to_pandas()
 
 # get a list of vehicle power for a drop list selection
-VEHPOWER = session.sql("select VEHPOWER from raw.motor_insurance_policy_claims")
+VEHPOWER = session.sql("select distinct VEHPOWER from raw.motor_insurance_policy_claims")
 pd_vehpower = VEHPOWER.to_pandas()
 
 # get a list of vehicle age for a drop list selection
-VEHAGE = session.sql("select VEHAGE from raw.motor_insurance_policy_claims")
+VEHAGE = session.sql("select distinct VEHAGE from raw.motor_insurance_policy_claims")
 pd_vehage = VEHAGE.to_pandas()
 
 # get a list of driver age for a drop list selection
-DRIVAGE = session.sql("select DRIVAGE from raw.motor_insurance_policy_claims")
+DRIVAGE = session.sql("select distinct DRIVAGE from raw.motor_insurance_policy_claims")
 pd_drivage = DRIVAGE.to_pandas()
 
 
 # get a list of bonusmalus for a drop list selection
-BONUSMALUS = session.sql("select BONUSMALUS from raw.motor_insurance_policy_claims")
+BONUSMALUS = session.sql("select distinct BONUSMALUS from raw.motor_insurance_policy_claims")
 pd_bonusmalus = BONUSMALUS.to_pandas()
 
 # get a list of vehbran for a drop list selection
-VEHBRAND = session.sql("select VEHBRAND from raw.motor_insurance_policy_claims")
+VEHBRAND = session.sql("select distinct VEHBRAND from raw.motor_insurance_policy_claims")
 pd_vehbrand = VEHBRAND.to_pandas()
 
 # get a list of vehgas for a drop list selection
-VEHGAS = session.sql("select VEHGAS from raw.motor_insurance_policy_claims")
+VEHGAS = session.sql("select distinct VEHGAS from raw.motor_insurance_policy_claims")
 pd_vehgas = VEHGAS.to_pandas()
 
 
