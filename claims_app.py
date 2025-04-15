@@ -153,7 +153,7 @@ elif 4 > sel_vehage <= 10:
 else:
     Vehicle_Age_Banded  = "VEHAGE_Over_10,"
 
-density = session.sql('select distinct density from  raw.motor_insurance_policy_claims where region = \'\'' + str(sel_region) + '\'\'')
+density = session.sql('select distinct density from  raw.motor_insurance_policy_claims where region = \'' + str(sel_region) + '\'')
 pd_density = density.to_pandas()
 sel_density = st.selectbox('Select the density owner region:', pd_density)
 
