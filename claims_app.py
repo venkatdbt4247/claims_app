@@ -7,20 +7,9 @@ st.title("Insurance Claims Prediction ")
 
 #session = get_active_session()
 
-connection_parameters = {
-    "account":"OVTDLSZ-EXB07759",
-    "user":"VENKAT4247",
-    "password":"LearnTrain@8998",
-    "role":"sysadmin",
-    "warehouse":"compute_wh",
-    "database":"INSURANCECLAIMSPREDICTIONREGRESSION_PROD",
-    "schema":"raw"
-   }
+cnx = st.connection( "snowflake")
 
-session = Session.builder.configs(connection_parameters).create()
-#cnx = st.connection( "snowflake")
-
-#session = cnx.session()
+session = cnx.session()
 
 session.sql("use role INSURANCECLAIMSPREDICTIONREGRESSION_DATA_SCIENTIST")
 
