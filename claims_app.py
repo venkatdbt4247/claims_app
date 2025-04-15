@@ -11,8 +11,10 @@ cnx = st.connection( "snowflake")
 
 session = cnx.session()
 
+session.sql("use role INSURANCECLAIMSPREDICTIONREGRESSION_DATA_SCIENTIST")
+
 # get a list of area for a drop list selection
-AREA =  session.sql("select distinct AREA from raw.motor_insurance_policy_claims")
+AREA = AREA = session.sql("select distinct AREA from raw.motor_insurance_policy_claims")
 pd_area = AREA.to_pandas()
 
 # get a list of vehicle power for a drop list selection
@@ -68,6 +70,23 @@ st.markdown("""
      </style>
 """, unsafe_allow_html=True)
 
+
+st.markdown("""
+     <style>
+     div[data-baseweb="text_input"] {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 5px;
+        border: 2px solid #4CAF50
+     }
+     div[data-baseweb="select"] > div {
+        color: #333333;
+        font-weight: bold;
+     }
+     </style>
+""", unsafe_allow_html=True)
+
+
 st.markdown("""
      <style>
      div.stButton > button.first-child {
@@ -87,6 +106,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Oyt the list of area into a drop list selector 
+
+sel_exposure = st.text_input("Enter the Exposure (range from 0 to 1):")
+
 sel_area = st.selectbox('Select the Consumer area:', pd_area)
 sel_vehpower = st.selectbox('Select the Vehicle power:', pd_vehpower)
 
@@ -101,6 +123,7 @@ sel_vehbrand = st.selectbox('Select The Vehicle brand:', pd_vehbrand)
 sel_vehgas = st.selectbox('Select the Vehicle Fuel Type :', pd_vehgas)
 sel_region = st.selectbox('Select the Vehicle owner region:', pd_region)
 
+sel_rows = st.text_input("Enter the sample size")
 if sel_drivage < 18:
     Driver_Age_Banded  = "DRIVAGE_Under_18"
 elif 18 > sel_drivage <= 21:
@@ -135,6 +158,7 @@ sel_density = session.sql('select distinct density from  raw.motor_insurance_pol
 
 
 if st.button('Submit'):
-    sql_insert = 'insert into raw.motor_insurance_policy_claims select \''+ +'\',\''+ + '\''
-    # st.write(sql_insert)
-    result = session.sql(sql_insert)
+    for i in range(int(sel_rows)):
+        sql_insert = 'insert into raw.motor_insurance_policy_claims select \''+ +'\',\''+ + '\''
+        # st.write(sql_insert)
+        result = session.sql(sql_insert)
