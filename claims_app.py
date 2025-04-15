@@ -9,12 +9,10 @@ st.title("Insurance Claims Prediction ")
 
 cnx = st.connection( "snowflake")
 
-session = cnx.session()
-
 session.sql("use role INSURANCECLAIMSPREDICTIONREGRESSION_DATA_SCIENTIST")
 
 # get a list of area for a drop list selection
-AREA = session.sql("select distinct AREA from raw.motor_insurance_policy_claims")
+AREA = AREA = session.sql("select distinct AREA from raw.motor_insurance_policy_claims")
 pd_area = AREA.to_pandas()
 
 # get a list of vehicle power for a drop list selection
@@ -46,6 +44,47 @@ pd_vehgas = VEHGAS.to_pandas()
 # get a list of region for a drop list selection
 REGION = session.sql("select DISTINCT REGION from raw.motor_insurance_policy_claims")
 pd_region = REGION.to_pandas()
+
+st.markdown("""
+     <style>
+     .stApp {
+           background-color: #f0f8ff;
+     }
+     </style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+     <style>
+     div[data-baseweb="select"] {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 5px;
+        border: 2px solid #4CAF50
+     }
+     div[data-baseweb="select"] > div {
+        color: #333333;
+        font-weight: bold;
+     }
+     </style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+     <style>
+     div.stButton > button.first-child {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.5em 1em;
+        font-weight: bold;
+        transition: 0.3s;
+        border: 2px solid #4CAF50
+     }
+     div.stButton > button:first-child-hove {
+        background-color: #45a049;
+     }
+     </style>
+""", unsafe_allow_html=True)
 
 # Oyt the list of area into a drop list selector 
 sel_area = st.selectbox('Select the Consumer area:', pd_area)
@@ -96,6 +135,6 @@ sel_density = session.sql('select distinct density from  raw.motor_insurance_pol
 
 
 if st.button('Submit'):
-    #sql_insert = 'insert into raw.motor_insurance_policy_claims select \''+ +'\',\''+ + '\''
+    sql_insert = 'insert into raw.motor_insurance_policy_claims select \''+ +'\',\''+ + '\''
     # st.write(sql_insert)
     result = session.sql(sql_insert)
