@@ -11,6 +11,7 @@ cnx = st.connection( "snowflake")
 
 session = cnx.session()
 
+
 session.sql("use role INSURANCECLAIMSPREDICTIONREGRESSION_DATA_SCIENTIST")
 
 # get a list of area for a drop list selection
@@ -152,13 +153,15 @@ elif 4 > sel_vehage <= 10:
 else:
     Vehicle_Age_Banded  = "VEHAGE_Over_10,"
 
-sel_density = session.sql('select distinct density from  raw.motor_insurance_policy_claims where region = \'' + sel_region + '\'')
+density = session.sql('select distinct density from  raw.motor_insurance_policy_claims where region = \'\'' + str(sel_region) + '\'\'')
+pd_density = density.to_pandas()
+sel_density = st.selectbox('Select the density owner region:', pd_density)
 
 # sel_log_density = math.log(sel_density)
-
 
 
 if st.button('Submit'):
     for i in range(int(sel_rows)):
         sql_insert = 'insert into raw.motor_insurance_policy_claims (EXPOSURE,AREA ,VEHPOWER,VEHAGE ,DRIVAGE, BONUSMALUS,VEHBRAND,VEHGAS ,DENSITY, REGION)select ' + str(sel_exposure) +',\'\''+  str(sel_area) + '\'\',\''+  str(sel_vehpower) + '\',\''+  str(sel_vehage)   +'\',\''+  str(sel_drivage)+ '\',\''+  str(sel_bonusmalus) + '\',\'\''+  str(sel_vehbrand)   +'\'\',' +  str(sel_vehgas)   +',\'\''+  str(sel_region)   +'\'\',\''+  str(sel_density) + '\''
         result = session.sql(sql_insert)
+        st.write(result)
