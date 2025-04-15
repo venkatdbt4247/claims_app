@@ -9,10 +9,8 @@ st.title("Insurance Claims Prediction ")
 
 cnx = st.connection( "snowflake")
 
-session.sql("use role INSURANCECLAIMSPREDICTIONREGRESSION_DATA_SCIENTIST")
-
 # get a list of area for a drop list selection
-AREA = AREA = session.sql("select distinct AREA from raw.motor_insurance_policy_claims")
+AREA =  session.sql("select distinct AREA from raw.motor_insurance_policy_claims")
 pd_area = AREA.to_pandas()
 
 # get a list of vehicle power for a drop list selection
