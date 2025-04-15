@@ -164,4 +164,4 @@ if st.button('Submit'):
     for i in range(int(sel_rows)):
         sql_insert = 'insert into raw.motor_insurance_policy_claims (EXPOSURE,AREA ,VEHPOWER,VEHAGE ,DRIVAGE, BONUSMALUS,VEHBRAND,VEHGAS ,DENSITY, REGION)select ' + str(sel_exposure) +',\'\''+  str(sel_area) + '\'\',\''+  str(sel_vehpower) + '\',\''+  str(sel_vehage)   +'\',\''+  str(sel_drivage)+ '\',\''+  str(sel_bonusmalus) + '\',\'\''+  str(sel_vehbrand)   +'\'\',' +  str(sel_vehgas)   +',\''+  str(sel_region)   +'\',\''+  str(sel_density) + '\''
         result = session.sql(sql_insert)
-        st.write(result)
+        st.write("success")
