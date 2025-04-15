@@ -92,6 +92,6 @@ sel_density = session.sql('select distinct density from  raw.motor_insurance_pol
 
 
 if st.button('Submit'):
-    sql_insert = 'insert into raw.motor_insurance_policy_claims select \''+ +'\',\''+ + '\''
+    #sql_insert = 'insert into raw.motor_insurance_policy_claims select \''+ +'\',\''+ + '\''
     # st.write(sql_insert)
-    result = session.sql(sql_insert
+    result = session.sql(sql_insert)
